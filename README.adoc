@@ -1,0 +1,9 @@
+A REST API that is useful for testing API clients because it responds to HTTP requests that tell it what to do - and it will then spinelessly do as it was told and hence return a HTTP response as per the API client's wishes.
+
+== Implementation details
+
+* Kotlin
+* https://serverless.com[Serverless]
+* https://github.com/bbilger/jrestless[JRestless]
+* JAX-RS
+* Maven
