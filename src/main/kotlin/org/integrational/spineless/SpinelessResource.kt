@@ -19,7 +19,7 @@ class SpinelessResource(
         const val delay = 0L
         const val status = 200
         const val type = MediaType.APPLICATION_JSON
-        const val body = """{ "status" : "OK"}"""
+        const val body = """{ "status" : "OK" }"""
     }
 
     @GET // JAX-RS automatically adds support for @HEAD and @OPTIONS
