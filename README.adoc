@@ -2,10 +2,132 @@ A REST API that is useful for testing API clients because it responds to HTTP re
 
 == Usage
 
-* `status`
-* `type`
-* `body`
-* `delay` in milliseconds
+* `pathHeader`: name of the HTTP response header containing the last element of the URL path to which the HTTP request was sent
+* `delay`: time in milliseconds to wait before returning a HTTP response
+* `status`: HTTP response status code
+* `type`: HTTP response content type
+* `body`: HTTP response body
+
+== Examples
+
+HTTP GET request relying on all defaults
+
+----
+curl -i -X GET https://91xjbs8dv5.execute-api.eu-west-1.amazonaws.com/prod/spineless/anyPathWhatsoever
+----
+
+returns
+
+----
+HTTP/1.1 200 OK
+Content-Type: application/json
+Content-Length: 18
+Connection: keep-alive
+Date: Sun, 08 Oct 2017 11:45:45 GMT
+x-amzn-RequestId: 388e5e90-ac1e-11e7-a295-9f7892cd4256
+X-Spineless-Request-Path: anyPathWhatsoever
+X-Amzn-Trace-Id: sampled=0;root=1-59da0fe9-4010020f0a9628ba48ff26d5
+X-Cache: Miss from cloudfront
+Via: 1.1 7ad0ce458d08cf464eddbfc845b797d2.cloudfront.net (CloudFront)
+X-Amz-Cf-Id: FFv3NVX0kawUpEQsBSb6bJ1T2W1CxbqdjFDk1xS39IEbVA8m833xlA==
+
+{ "status" : "OK"}
+----
+
+HTTP `GET` request
+
+----
+curl -i -X GET https://91xjbs8dv5.execute-api.eu-west-1.amazonaws.com/prod/spineless/aPath?pathHeader=X-Path\&delay=1000\&status=202\&type=text/plain\&body=this+is+a+GET+response+body
+----
+
+returns
+
+----
+HTTP/1.1 202 Accepted
+Content-Type: text/plain
+Content-Length: 27
+Connection: keep-alive
+Date: Sun, 08 Oct 2017 11:44:03 GMT
+x-amzn-RequestId: fae1562c-ac1d-11e7-8236-a938a0e03490
+X-Path: aPath
+X-Amzn-Trace-Id: sampled=0;root=1-59da0f82-3e1fe639d57cd9e4a6cf1761
+X-Cache: Miss from cloudfront
+Via: 1.1 81161ddcad4c4e7e97f10e3ea63eea9a.cloudfront.net (CloudFront)
+X-Amz-Cf-Id: qp2IMjFf_yU8C9Vc1ns-FqIqo0ZYefCgM-SmWytcdW-8uS4lUyIdsA==
+
+this is a GET response body
+----
+
+HTTP `PUT` request
+
+----
+curl -i -X PUT https://91xjbs8dv5.execute-api.eu-west-1.amazonaws.com/prod/spineless/anotherPath?pathHeader=X-Path\&delay=1000\&status=202\&type=text/plain\&body=this+is+a+PUT+response+body
+----
+
+returns
+
+----
+HTTP/1.1 202 Accepted
+Content-Type: text/plain
+Content-Length: 27
+Connection: keep-alive
+Date: Sun, 08 Oct 2017 11:44:27 GMT
+x-amzn-RequestId: 0953c2bf-ac1e-11e7-8d0a-1fe91864ccce
+X-Path: anotherPath
+X-Amzn-Trace-Id: sampled=0;root=1-59da0f9a-d8f0eee467574f438b9396d6
+X-Cache: Miss from cloudfront
+Via: 1.1 25f81f6cd2018b71aea19d5a5b16c0d0.cloudfront.net (CloudFront)
+X-Amz-Cf-Id: PJ1nCQguzHCgzUUWhhapxth4MsWCfnouPii7W_debaZ181unfOI1Fw==
+
+this is a PUT response body
+----
+
+HTTP `POST` request
+----
+curl -i -X POST https://91xjbs8dv5.execute-api.eu-west-1.amazonaws.com/prod/spineless/yetAnotherPath?pathHeader=X-Path\&delay=1000\&status=202\&type=text/plain\&body=this+is+a+POST+response+body
+----
+
+returns
+
+----
+HTTP/1.1 202 Accepted
+Content-Type: text/plain
+Content-Length: 28
+Connection: keep-alive
+Date: Sun, 08 Oct 2017 11:44:48 GMT
+x-amzn-RequestId: 15f56709-ac1e-11e7-a771-2da04b969a6d
+X-Path: yetAnotherPath
+X-Amzn-Trace-Id: sampled=0;root=1-59da0faf-fc8cba30b8baa0477183a766
+X-Cache: Miss from cloudfront
+Via: 1.1 36b59f391de6498d746c239097be2009.cloudfront.net (CloudFront)
+X-Amz-Cf-Id: YU0GFsY423bZWjS2ATExNORlq8u4kvhOhU1BYOcKTQ2uIwdSeAbEzQ==
+
+this is a POST response body
+----
+
+HTTP `DELETE` request
+
+----
+curl -i -X DELETE https://91xjbs8dv5.execute-api.eu-west-1.amazonaws.com/prod/spineless/aLastPath?pathHeader=X-Path\&delay=1000\&status=202\&type=text/plain\&body=this+is+a+DELETE+response+body
+----
+
+returns
+
+----
+HTTP/1.1 202 Accepted
+Content-Type: text/plain
+Content-Length: 30
+Connection: keep-alive
+Date: Sun, 08 Oct 2017 11:45:15 GMT
+x-amzn-RequestId: 260ef403-ac1e-11e7-a69a-27a36d7d2433
+X-Path: aLastPath
+X-Amzn-Trace-Id: sampled=0;root=1-59da0fca-37a26e47b4016344efd51367
+X-Cache: Miss from cloudfront
+Via: 1.1 bcce1a50d599e8bf6d2d81a863bbed35.cloudfront.net (CloudFront)
+X-Amz-Cf-Id: EhuOTzr1tRxlPPN9tWX3_XAKWLw3Gqo0gC31l5YXDyRLni9dANzxmw==
+
+this is a DELETE response body
+----
 
 == Implementation details
 

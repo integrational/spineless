@@ -52,7 +52,7 @@ functions:
     handler: org.integrational.spineless.RequestHandler
     events:
       - http:
-          path: spineless
+          path: spineless/{proxy+}
           method: any
 
 #    The following are a few example events you can configure
