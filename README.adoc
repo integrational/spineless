@@ -25,7 +25,7 @@ where
 
 HTTP query parameters:
 
-* `pathHeader`: Name of the HTTP response header containing the value of `{path}` (see above). Defaults to `X-Spineless-Request-Path`
+* `summaryHeader`: Name of the HTTP response header containing all parameters used by the API implementation. Defaults to `X-Spineless-Summary`
 * `delay`: Time in milliseconds to wait before returning a HTTP response. Defaults to `0`
 * `status`: HTTP response status code. Defaults to `200`
 * `type`: HTTP response content type. Defaults to `application/json`
@@ -46,24 +46,24 @@ returns
 ----
 HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 18
+Content-Length: 127
 Connection: keep-alive
-Date: Sun, 08 Oct 2017 11:45:45 GMT
-x-amzn-RequestId: 388e5e90-ac1e-11e7-a295-9f7892cd4256
-X-Spineless-Request-Path: anyPathWhatsoever
-X-Amzn-Trace-Id: sampled=0;root=1-59da0fe9-4010020f0a9628ba48ff26d5
+Date: Mon, 09 Oct 2017 12:44:56 GMT
+x-amzn-RequestId: a740eae3-acef-11e7-a420-49abdae7720c
+X-Spineless-Summary: {"summaryHeader":"X-Spineless-Summary","path":"anyPathWhatsoever","delay":0,"status":200,"type":"application/json","body":null}
+X-Amzn-Trace-Id: sampled=0;root=1-59db6f48-c937c2f43c447db4788cb0ee
 X-Cache: Miss from cloudfront
-Via: 1.1 7ad0ce458d08cf464eddbfc845b797d2.cloudfront.net (CloudFront)
-X-Amz-Cf-Id: FFv3NVX0kawUpEQsBSb6bJ1T2W1CxbqdjFDk1xS39IEbVA8m833xlA==
+Via: 1.1 3664cc1fd21a07e55327a9c256fa758a.cloudfront.net (CloudFront)
+X-Amz-Cf-Id: iNCJ3wUqL83xcLvXy464OTBus67-Bwc7yNmkto4OI3ivU09lq6yonA==
 
-{ "status" : "OK" }
+{"summaryHeader":"X-Spineless-Summary","path":"anyPathWhatsoever","delay":0,"status":200,"type":"application/json","body":null}
 ----
 
 The HTTP `GET` request
 
 [source]
 ----
-curl -i -X GET https://api.integrational.org/spineless/aPath?pathHeader=X-Path\&delay=1000\&status=202\&type=text/plain\&body=this+is+a+GET+response+body
+curl -i -X GET https://api.integrational.org/spineless/aPath?summaryHeader=X-Sum\&delay=1000\&status=202\&type=text/plain\&body=this+is+a+GET+response+body
 ----
 
 returns
@@ -74,13 +74,13 @@ HTTP/1.1 202 Accepted
 Content-Type: text/plain
 Content-Length: 27
 Connection: keep-alive
-Date: Sun, 08 Oct 2017 11:44:03 GMT
-x-amzn-RequestId: fae1562c-ac1d-11e7-8236-a938a0e03490
-X-Path: aPath
-X-Amzn-Trace-Id: sampled=0;root=1-59da0f82-3e1fe639d57cd9e4a6cf1761
+Date: Mon, 09 Oct 2017 12:50:10 GMT
+x-amzn-RequestId: 61d02a35-acf0-11e7-9979-b7a444a30618
+X-Sum: {"summaryHeader":"X-Sum","path":"aPath","delay":1000,"status":202,"type":"text/plain","body":"this is a GET response body"}
+X-Amzn-Trace-Id: sampled=0;root=1-59db7081-c3fe3a5586aeb403978363e3
 X-Cache: Miss from cloudfront
-Via: 1.1 81161ddcad4c4e7e97f10e3ea63eea9a.cloudfront.net (CloudFront)
-X-Amz-Cf-Id: qp2IMjFf_yU8C9Vc1ns-FqIqo0ZYefCgM-SmWytcdW-8uS4lUyIdsA==
+Via: 1.1 e77255787d333d7481d3de3a89fb3ee2.cloudfront.net (CloudFront)
+X-Amz-Cf-Id: sUWO8-sGiIbQ7_veCRUo6XWNvZTFd63GAYqe39WZKYJT32LO45xxLQ==
 
 this is a GET response body
 ----
@@ -89,7 +89,7 @@ The HTTP `PUT` request
 
 [source]
 ----
-curl -i -X PUT https://api.integrational.org/spineless/anotherPath?pathHeader=X-Path\&delay=1000\&status=202\&type=text/plain\&body=this+is+a+PUT+response+body
+curl -i -X PUT https://api.integrational.org/spineless/anotherPath?summaryHeader=X-Sum\&delay=1000\&status=202\&type=text/plain\&body=this+is+a+PUT+response+body
 ----
 
 returns
@@ -100,13 +100,13 @@ HTTP/1.1 202 Accepted
 Content-Type: text/plain
 Content-Length: 27
 Connection: keep-alive
-Date: Sun, 08 Oct 2017 11:44:27 GMT
-x-amzn-RequestId: 0953c2bf-ac1e-11e7-8d0a-1fe91864ccce
-X-Path: anotherPath
-X-Amzn-Trace-Id: sampled=0;root=1-59da0f9a-d8f0eee467574f438b9396d6
+Date: Mon, 09 Oct 2017 12:50:54 GMT
+x-amzn-RequestId: 7c645d40-acf0-11e7-b5ce-a36276120fa0
+X-Sum: {"summaryHeader":"X-Sum","path":"anotherPath","delay":1000,"status":202,"type":"text/plain","body":"this is a PUT response body"}
+X-Amzn-Trace-Id: sampled=0;root=1-59db70ad-8a9f220352811f5c948ccefa
 X-Cache: Miss from cloudfront
-Via: 1.1 25f81f6cd2018b71aea19d5a5b16c0d0.cloudfront.net (CloudFront)
-X-Amz-Cf-Id: PJ1nCQguzHCgzUUWhhapxth4MsWCfnouPii7W_debaZ181unfOI1Fw==
+Via: 1.1 6fe90cb7a4852d2683f62e862f7a790c.cloudfront.net (CloudFront)
+X-Amz-Cf-Id: n299UqsBM4FcjH4-fGW4tkRoMMVzNG4WLMxrrVAzi0H_MnhKkQLmeg==
 
 this is a PUT response body
 ----
@@ -115,7 +115,7 @@ The HTTP `POST` request
 
 [source]
 ----
-curl -i -X POST https://api.integrational.org/spineless/yetAnotherPath?pathHeader=X-Path\&delay=1000\&status=202\&type=text/plain\&body=this+is+a+POST+response+body
+curl -i -X POST https://api.integrational.org/spineless/yetAnotherPath?summaryHeader=X-Sum\&delay=1000\&status=202\&type=text/plain\&body=this+is+a+POST+response+body
 ----
 
 returns
@@ -126,13 +126,13 @@ HTTP/1.1 202 Accepted
 Content-Type: text/plain
 Content-Length: 28
 Connection: keep-alive
-Date: Sun, 08 Oct 2017 11:44:48 GMT
-x-amzn-RequestId: 15f56709-ac1e-11e7-a771-2da04b969a6d
-X-Path: yetAnotherPath
-X-Amzn-Trace-Id: sampled=0;root=1-59da0faf-fc8cba30b8baa0477183a766
+Date: Mon, 09 Oct 2017 12:51:24 GMT
+x-amzn-RequestId: 8e148f11-acf0-11e7-addd-1f77760b5a1c
+X-Sum: {"summaryHeader":"X-Sum","path":"yetAnotherPath","delay":1000,"status":202,"type":"text/plain","body":"this is a POST response body"}
+X-Amzn-Trace-Id: sampled=0;root=1-59db70cb-37af9f823be2131e152a520d
 X-Cache: Miss from cloudfront
-Via: 1.1 36b59f391de6498d746c239097be2009.cloudfront.net (CloudFront)
-X-Amz-Cf-Id: YU0GFsY423bZWjS2ATExNORlq8u4kvhOhU1BYOcKTQ2uIwdSeAbEzQ==
+Via: 1.1 e77255787d333d7481d3de3a89fb3ee2.cloudfront.net (CloudFront)
+X-Amz-Cf-Id: mTmIubvYb2Z8m5XhNFSesjtKUWcFjq34kWtTQCADZo76cSR_TmXvzw==
 
 this is a POST response body
 ----
@@ -141,7 +141,7 @@ The HTTP `DELETE` request
 
 [source]
 ----
-curl -i -X DELETE https://api.integrational.org/spineless/aLastPath?pathHeader=X-Path\&delay=1000\&status=202\&type=text/plain\&body=this+is+a+DELETE+response+body
+curl -i -X DELETE https://api.integrational.org/spineless/aLastPath?summaryHeader=X-Sum\&delay=1000\&status=202\&type=text/plain\&body=this+is+a+DELETE+response+body
 ----
 
 returns
@@ -152,13 +152,13 @@ HTTP/1.1 202 Accepted
 Content-Type: text/plain
 Content-Length: 30
 Connection: keep-alive
-Date: Sun, 08 Oct 2017 11:45:15 GMT
-x-amzn-RequestId: 260ef403-ac1e-11e7-a69a-27a36d7d2433
-X-Path: aLastPath
-X-Amzn-Trace-Id: sampled=0;root=1-59da0fca-37a26e47b4016344efd51367
+Date: Mon, 09 Oct 2017 12:51:53 GMT
+x-amzn-RequestId: 9f7bf9ac-acf0-11e7-8415-0547587d0bbd
+X-Sum: {"summaryHeader":"X-Sum","path":"aLastPath","delay":1000,"status":202,"type":"text/plain","body":"this is a DELETE response body"}
+X-Amzn-Trace-Id: sampled=0;root=1-59db70e8-da0f07a5b36a94103d264c64
 X-Cache: Miss from cloudfront
-Via: 1.1 bcce1a50d599e8bf6d2d81a863bbed35.cloudfront.net (CloudFront)
-X-Amz-Cf-Id: EhuOTzr1tRxlPPN9tWX3_XAKWLw3Gqo0gC31l5YXDyRLni9dANzxmw==
+Via: 1.1 63db28734e1b9429c04087abd41a1692.cloudfront.net (CloudFront)
+X-Amz-Cf-Id: h8hW75SrgXzMcDq8ICWPGLeHyK9VvSXbyC-g2SH1iK9C3qLFXwb-vw==
 
 this is a DELETE response body
 ----
