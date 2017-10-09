@@ -16,11 +16,16 @@ A REST API that is useful for testing API clients because it responds to HTTP re
 
 == Usage
 
-Endpoint URL: `https://91xjbs8dv5.execute-api.eu-west-1.amazonaws.com/prod/spineless/{path}`
+Endpoint URL: `https://api.integrational.org/spineless/{path}`
+
+where
+
+* HTTP requests are only accepted via HTTPS
+* `{path}` indicates any non-empty trailing URL path element. In other words, Spineless will respond to requests to any HTTP resource anchored at its base URL `https://api.integrational.org/spineless`, but a resource must be given and it cannot be nested (i.e., `path/subpath` will not work).
 
 HTTP query parameters:
 
-* `pathHeader`: Name of the HTTP response header containing the value of `{path}` (the last element of the URL path to which the HTTP request was sent). Defaults to `X-Spineless-Request-Path`
+* `pathHeader`: Name of the HTTP response header containing the value of `{path}` (see above). Defaults to `X-Spineless-Request-Path`
 * `delay`: Time in milliseconds to wait before returning a HTTP response. Defaults to `0`
 * `status`: HTTP response status code. Defaults to `200`
 * `type`: HTTP response content type. Defaults to `application/json`
@@ -32,7 +37,7 @@ This HTTP GET request relying on defaults
 
 [source]
 ----
-curl -i -X GET https://91xjbs8dv5.execute-api.eu-west-1.amazonaws.com/prod/spineless/anyPathWhatsoever
+curl -i -X GET https://api.integrational.org/spineless/anyPathWhatsoever
 ----
 
 returns
@@ -58,7 +63,7 @@ The HTTP `GET` request
 
 [source]
 ----
-curl -i -X GET https://91xjbs8dv5.execute-api.eu-west-1.amazonaws.com/prod/spineless/aPath?pathHeader=X-Path\&delay=1000\&status=202\&type=text/plain\&body=this+is+a+GET+response+body
+curl -i -X GET https://api.integrational.org/spineless/aPath?pathHeader=X-Path\&delay=1000\&status=202\&type=text/plain\&body=this+is+a+GET+response+body
 ----
 
 returns
@@ -84,7 +89,7 @@ The HTTP `PUT` request
 
 [source]
 ----
-curl -i -X PUT https://91xjbs8dv5.execute-api.eu-west-1.amazonaws.com/prod/spineless/anotherPath?pathHeader=X-Path\&delay=1000\&status=202\&type=text/plain\&body=this+is+a+PUT+response+body
+curl -i -X PUT https://api.integrational.org/spineless/anotherPath?pathHeader=X-Path\&delay=1000\&status=202\&type=text/plain\&body=this+is+a+PUT+response+body
 ----
 
 returns
@@ -110,7 +115,7 @@ The HTTP `POST` request
 
 [source]
 ----
-curl -i -X POST https://91xjbs8dv5.execute-api.eu-west-1.amazonaws.com/prod/spineless/yetAnotherPath?pathHeader=X-Path\&delay=1000\&status=202\&type=text/plain\&body=this+is+a+POST+response+body
+curl -i -X POST https://api.integrational.org/spineless/yetAnotherPath?pathHeader=X-Path\&delay=1000\&status=202\&type=text/plain\&body=this+is+a+POST+response+body
 ----
 
 returns
@@ -136,7 +141,7 @@ The HTTP `DELETE` request
 
 [source]
 ----
-curl -i -X DELETE https://91xjbs8dv5.execute-api.eu-west-1.amazonaws.com/prod/spineless/aLastPath?pathHeader=X-Path\&delay=1000\&status=202\&type=text/plain\&body=this+is+a+DELETE+response+body
+curl -i -X DELETE https://api.integrational.org/spineless/aLastPath?pathHeader=X-Path\&delay=1000\&status=202\&type=text/plain\&body=this+is+a+DELETE+response+body
 ----
 
 returns

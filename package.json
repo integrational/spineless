@@ -1,0 +1,23 @@
+{
+  "name": "spineless",
+  "version": "1.0.0",
+  "description": "Spineless: A REST API that is useful for testing API clients because it spinelessly returns a HTTP response as per the API client's wishes",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/integrational/spineless.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/integrational/spineless/issues"
+  },
+  "homepage": "https://github.com/integrational/spineless#readme",
+  "dependencies": {
+    "serverless-domain-manager": "^1.1.13"
+  }
+}

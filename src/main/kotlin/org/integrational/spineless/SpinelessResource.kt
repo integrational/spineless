@@ -5,7 +5,11 @@ import javax.ws.rs.core.MediaType
 import javax.ws.rs.core.Response
 
 
-@Path("/spineless/{path}")
+/**
+ * REST resource for the Spineless API, which responds at all resource paths with a HTTP response defined by the client in its HTTP request.
+ * Reasonable defaults as specified in [Defaults] are applied.
+ */
+@Path("/{path}")
 class SpinelessResource(
         @PathParam("path") @DefaultValue("") private val path: String,
         @QueryParam("pathHeader") @DefaultValue(Defaults.pathHeader) private val pathHeader: String,
