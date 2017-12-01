@@ -2,6 +2,7 @@ package org.integrational.spineless
 
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import org.integrational.spineless.SpinelessResource.Companion.Defaults
+import java.io.InputStream
 import java.lang.Math.max
 import java.lang.Math.round
 import java.util.*
@@ -13,6 +14,7 @@ import javax.ws.rs.core.Response
 /**
  * REST resource for the Spineless API, which responds at all resource paths with a HTTP response defined by the client in its HTTP request.
  * Reasonable defaults as specified in [Defaults] are applied.
+ * Accepts (consumes) HTTP requests with any media type, but ignores the request body.
  */
 @Path("/{path}")
 class SpinelessResource(
@@ -51,10 +53,10 @@ class SpinelessResource(
     fun get() = respond()
 
     @PUT
-    fun put() = respond()
+    fun put(body: InputStream) = respond()
 
     @POST
-    fun post() = respond()
+    fun post(body: InputStream) = respond()
 
     @DELETE
     fun delete() = respond()
